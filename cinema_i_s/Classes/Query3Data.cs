@@ -14,7 +14,7 @@ namespace cinema_i_s.Classes
         public string seance_id { get; set; }
 
         public string id_hall { get; set; }
-        public string price { get; set; }
+        public int price { get; set; }
         public string movie_format { get; set; }
 
         public string data { get; set; }
