@@ -1,0 +1,28 @@
+﻿@model IEnumerable<cinema_i_s.Classes.Query5Data>
+@{
+    ViewBag.Title = "Результаты запроса";
+}
+<h2>@ViewBag.Title</h2>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Дата 
+        </th>
+        <th>
+            Count
+        </th>
+       
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.data
+            </td>
+            <td>
+                @item.count
+            </td>
+            
+        </tr>
+    }
+</table>

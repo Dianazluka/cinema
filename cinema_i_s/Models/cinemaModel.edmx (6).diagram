@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a7753ffff3ba4996957f65d3bcda3fc3" Name="Diagram1">
+        <EntityTypeShape EntityType="cinema_inform_sistemModel.associate" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cinema_inform_sistemModel.film" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cinema_inform_sistemModel.hall" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cinema_inform_sistemModel.seance" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cinema_inform_sistemModel.ticket" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cinema_inform_sistemModel.ticket_selling" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="cinema_inform_sistemModel.associate_id" ManuallyRouted="false" />
+        <AssociationConnector Association="cinema_inform_sistemModel.seance_id_assiciate_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="cinema_inform_sistemModel.seance_id_film_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="cinema_inform_sistemModel.seance_id_hall_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="cinema_inform_sistemModel.ticket_seance_id_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="cinema_inform_sistemModel.id_ticket" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

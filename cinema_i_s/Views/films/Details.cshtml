@@ -1,0 +1,58 @@
+﻿@model cinema_i_s.Models.film
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>film</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name_film)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name_film)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.producer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.age_limit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.age_limit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить запись", "Edit", new { id = Model.film_id }) |
+    @Html.ActionLink("Вернуться к записям", "Index")
+</p>

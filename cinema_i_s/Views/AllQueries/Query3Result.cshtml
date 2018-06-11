@@ -1,0 +1,72 @@
+﻿@model IEnumerable<cinema_i_s.Classes.Query3Data>
+@{
+    ViewBag.Title = "Результаты запроса";
+}
+<h2>@ViewBag.Title</h2>
+
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            ФИО сотрудника
+        </th>
+        <th>
+            Должность
+        </th>
+        <th>
+            Фильм
+        </th>
+        <th>
+            Сеанс
+        </th>
+        <th>
+            Зал
+        </th>
+        <th>
+            Цена
+        </th>
+        <th>
+            Формат фильма
+        </th>
+        <th>
+            Дата
+        </th>
+        <th>
+            Время
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @item.full_name
+        </td>
+        <td>
+            @item.position
+        </td>
+        <td>
+            @item.id_film
+        </td>
+        <td>
+            @item.seance_id
+        </td>
+        <td>
+            @item.id_hall
+        </td>
+        <td>
+            @item.price
+        </td>
+        <td>
+            @item.movie_format
+        </td>
+        <td>
+            @item.data
+        </td>
+        <td>
+            @item.time
+        </td>
+       
+    </tr>
+    }
+</table>

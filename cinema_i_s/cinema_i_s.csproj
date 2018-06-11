@@ -71,6 +71,9 @@
       <HintPath>..\packages\EnvDTE80.8.0.1\lib\net10\EnvDTE80.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="JQueryUIHelpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=1440f6df3b58b47e, processorArchitecture=MSIL">
+      <HintPath>..\packages\jQueryUIHelpers.Mvc5.3.0.0\lib\net45\JQueryUIHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -342,48 +345,61 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Classes\Query1Data.cs" />
+    <Compile Include="Classes\Query2Data.cs" />
+    <Compile Include="Classes\Query3Data.cs" />
+    <Compile Include="Classes\Query4Data.cs" />
+    <Compile Include="Classes\Query5Data.cs" />
+    <Compile Include="Classes\Query6Data.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AllQueriesController.cs" />
+    <Compile Include="Controllers\AllTablesController.cs" />
+    <Compile Include="Controllers\associatesController.cs" />
+    <Compile Include="Controllers\filmsController.cs" />
+    <Compile Include="Controllers\hallsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\seancesController.cs" />
+    <Compile Include="Controllers\ticketsController.cs" />
+    <Compile Include="Controllers\ticket_sellingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\associate.cs">
-      <DependentUpon>cinemaisModel.tt</DependentUpon>
+      <DependentUpon>cinemaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cinemaisModel.Context.cs">
+    <Compile Include="Models\cinemaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>cinemaisModel.Context.tt</DependentUpon>
+      <DependentUpon>cinemaModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cinemaisModel.cs">
+    <Compile Include="Models\cinemaModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>cinemaisModel.tt</DependentUpon>
+      <DependentUpon>cinemaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cinemaisModel.Designer.cs">
+    <Compile Include="Models\cinemaModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>cinemaisModel.edmx</DependentUpon>
+      <DependentUpon>cinemaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\film.cs">
-      <DependentUpon>cinemaisModel.tt</DependentUpon>
+      <DependentUpon>cinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\hall.cs">
-      <DependentUpon>cinemaisModel.tt</DependentUpon>
+      <DependentUpon>cinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\seance.cs">
-      <DependentUpon>cinemaisModel.tt</DependentUpon>
+      <DependentUpon>cinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ticket.cs">
-      <DependentUpon>cinemaisModel.tt</DependentUpon>
+      <DependentUpon>cinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ticket_selling.cs">
-      <DependentUpon>cinemaisModel.tt</DependentUpon>
+      <DependentUpon>cinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -391,19 +407,53 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\cinemaisModel.Context.tt">
+    <Content Include="Models\cinemaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>cinemaisModel.edmx</DependentUpon>
-      <LastGenOutput>cinemaisModel.Context.cs</LastGenOutput>
+      <DependentUpon>cinemaModel.edmx</DependentUpon>
+      <LastGenOutput>cinemaModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\cinemaisModel.tt">
+    <Content Include="Models\cinemaModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>cinemaisModel.edmx</DependentUpon>
-      <LastGenOutput>cinemaisModel.cs</LastGenOutput>
+      <DependentUpon>cinemaModel.edmx</DependentUpon>
+      <LastGenOutput>cinemaModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -411,17 +461,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="DatabaseWrapper.dll.config" />
-    <EntityDeploy Include="Models\cinemaisModel.edmx">
+    <EntityDeploy Include="Models\cinemaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>cinemaisModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>cinemaModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\cinemaisModel.edmx.diagram">
-      <DependentUpon>cinemaisModel.edmx</DependentUpon>
+    <Content Include="Models\cinemaModel.edmx.diagram">
+      <DependentUpon>cinemaModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.0.js" />
+    <Content Include="Scripts\jquery-ui-1.11.0.min.js" />
+    <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.js" />
+    <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -468,6 +522,39 @@
     <Content Include="Views\seances\Details.cshtml" />
     <Content Include="Views\seances\Edit.cshtml" />
     <Content Include="Views\seances\Index.cshtml" />
+    <Content Include="Views\associates\Create.cshtml" />
+    <Content Include="Views\associates\Delete.cshtml" />
+    <Content Include="Views\associates\Details.cshtml" />
+    <Content Include="Views\associates\Edit.cshtml" />
+    <Content Include="Views\associates\Index.cshtml" />
+    <Content Include="Views\films\Create.cshtml" />
+    <Content Include="Views\films\Delete.cshtml" />
+    <Content Include="Views\films\Details.cshtml" />
+    <Content Include="Views\films\Edit.cshtml" />
+    <Content Include="Views\films\Index.cshtml" />
+    <Content Include="Views\halls\Create.cshtml" />
+    <Content Include="Views\halls\Delete.cshtml" />
+    <Content Include="Views\halls\Details.cshtml" />
+    <Content Include="Views\halls\Edit.cshtml" />
+    <Content Include="Views\halls\Index.cshtml" />
+    <Content Include="Views\tickets\Create.cshtml" />
+    <Content Include="Views\tickets\Delete.cshtml" />
+    <Content Include="Views\tickets\Details.cshtml" />
+    <Content Include="Views\tickets\Edit.cshtml" />
+    <Content Include="Views\tickets\Index.cshtml" />
+    <Content Include="Views\ticket_selling\Create.cshtml" />
+    <Content Include="Views\ticket_selling\Delete.cshtml" />
+    <Content Include="Views\ticket_selling\Details.cshtml" />
+    <Content Include="Views\ticket_selling\Edit.cshtml" />
+    <Content Include="Views\ticket_selling\Index.cshtml" />
+    <Content Include="Views\AllTables\Index.cshtml" />
+    <Content Include="Views\AllQueries\Index.cshtml" />
+    <Content Include="Views\AllQueries\Query1Result.cshtml" />
+    <Content Include="Views\AllQueries\Query2Result.cshtml" />
+    <Content Include="Views\AllQueries\Query3Result.cshtml" />
+    <Content Include="Views\AllQueries\Query4Result.cshtml" />
+    <Content Include="Views\AllQueries\Query5Result.cshtml" />
+    <Content Include="Views\AllQueries\Query6Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

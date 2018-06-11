@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище cinema_inform_sistemModel" Provider="Npgsql" ProviderManifestToken="9.6.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="associate">
+          <Key>
+            <PropertyRef Name="associate_id" />
+          </Key>
+          <Property Name="age" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="full_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="position" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="associate_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="name_film" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="producer" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="genre" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="year" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="age_limit" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="film_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hall">
+          <Key>
+            <PropertyRef Name="holl_id" />
+          </Key>
+          <Property Name="name_hall" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="capacity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="holl_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "timetz" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "time" в таблице "cinema_inform_sistem.public.seance" был исключен.-->
+        <EntityType Name="seance">
+          <Key>
+            <PropertyRef Name="seance_id" />
+          </Key>
+          <Property Name="id_film" Type="int4" Nullable="false" />
+          <Property Name="id_assiciate" Type="int4" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="seance_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_hall" Type="int4" Nullable="false" />
+          <Property Name="price" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="movie_format" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="ticket_id" />
+          </Key>
+          <Property Name="seance_id" Type="int4" Nullable="false" />
+          <Property Name="row" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="place" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ticket_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket_selling">
+          <Key>
+            <PropertyRef Name="ticket_selling_id" />
+          </Key>
+          <Property Name="id_ticket" Type="int4" Nullable="false" />
+          <Property Name="date_of_sale" Type="date" Nullable="false" />
+          <Property Name="associate_id" Type="int4" Nullable="false" />
+          <Property Name="ticket_selling_id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="associate_id">
+          <End Role="associate" Type="Self.associate" Multiplicity="1" />
+          <End Role="ticket_selling" Type="Self.ticket_selling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="associate">
+              <PropertyRef Name="associate_id" />
+            </Principal>
+            <Dependent Role="ticket_selling">
+              <PropertyRef Name="associate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_ticket">
+          <End Role="ticket" Type="Self.ticket" Multiplicity="1" />
+          <End Role="ticket_selling" Type="Self.ticket_selling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ticket">
+              <PropertyRef Name="ticket_id" />
+            </Principal>
+            <Dependent Role="ticket_selling">
+              <PropertyRef Name="id_ticket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seance_id_assiciate_fkey">
+          <End Role="associate" Type="Self.associate" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="seance" Type="Self.seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="associate">
+              <PropertyRef Name="associate_id" />
+            </Principal>
+            <Dependent Role="seance">
+              <PropertyRef Name="id_assiciate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seance_id_film_fkey">
+          <End Role="film" Type="Self.film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="seance" Type="Self.seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="film_id" />
+            </Principal>
+            <Dependent Role="seance">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seance_id_hall_fkey">
+          <End Role="hall" Type="Self.hall" Multiplicity="1" />
+          <End Role="seance" Type="Self.seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hall">
+              <PropertyRef Name="holl_id" />
+            </Principal>
+            <Dependent Role="seance">
+              <PropertyRef Name="id_hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ticket_seance_id_fkey">
+          <End Role="seance" Type="Self.seance" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seance">
+              <PropertyRef Name="seance_id" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="seance_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище cinema_inform_sistemModelContainer">
+          <EntitySet Name="associate" EntityType="Self.associate" Schema="public" store:Type="Tables" />
+          <EntitySet Name="film" EntityType="Self.film" Schema="public" store:Type="Tables" />
+          <EntitySet Name="hall" EntityType="Self.hall" Schema="public" store:Type="Tables" />
+          <EntitySet Name="seance" EntityType="Self.seance" Schema="public" store:Type="Tables" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" Schema="public" store:Type="Tables" />
+          <EntitySet Name="ticket_selling" EntityType="Self.ticket_selling" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="associate_id" Association="Self.associate_id">
+            <End Role="associate" EntitySet="associate" />
+            <End Role="ticket_selling" EntitySet="ticket_selling" />
+          </AssociationSet>
+          <AssociationSet Name="id_ticket" Association="Self.id_ticket">
+            <End Role="ticket" EntitySet="ticket" />
+            <End Role="ticket_selling" EntitySet="ticket_selling" />
+          </AssociationSet>
+          <AssociationSet Name="seance_id_assiciate_fkey" Association="Self.seance_id_assiciate_fkey">
+            <End Role="associate" EntitySet="associate" />
+            <End Role="seance" EntitySet="seance" />
+          </AssociationSet>
+          <AssociationSet Name="seance_id_film_fkey" Association="Self.seance_id_film_fkey">
+            <End Role="film" EntitySet="film" />
+            <End Role="seance" EntitySet="seance" />
+          </AssociationSet>
+          <AssociationSet Name="seance_id_hall_fkey" Association="Self.seance_id_hall_fkey">
+            <End Role="hall" EntitySet="hall" />
+            <End Role="seance" EntitySet="seance" />
+          </AssociationSet>
+          <AssociationSet Name="ticket_seance_id_fkey" Association="Self.ticket_seance_id_fkey">
+            <End Role="seance" EntitySet="seance" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cinema_inform_sistemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="associate">
+          <Key>
+            <PropertyRef Name="associate_id" />
+          </Key>
+          <Property Name="age" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="full_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="associate_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ticket_selling" Relationship="Self.associate_id" FromRole="associate" ToRole="ticket_selling" />
+          <NavigationProperty Name="seance" Relationship="Self.seance_id_assiciate_fkey" FromRole="associate" ToRole="seance" />
+        </EntityType>
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="name_film" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="producer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="genre" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="year" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="age_limit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="film_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="seance" Relationship="Self.seance_id_film_fkey" FromRole="film" ToRole="seance" />
+        </EntityType>
+        <EntityType Name="hall">
+          <Key>
+            <PropertyRef Name="holl_id" />
+          </Key>
+          <Property Name="name_hall" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="capacity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="holl_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="seance" Relationship="Self.seance_id_hall_fkey" FromRole="hall" ToRole="seance" />
+        </EntityType>
+        <EntityType Name="seance">
+          <Key>
+            <PropertyRef Name="seance_id" />
+          </Key>
+          <Property Name="id_film" Type="Int32" Nullable="false" />
+          <Property Name="id_assiciate" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="seance_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_hall" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="movie_format" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="associate" Relationship="Self.seance_id_assiciate_fkey" FromRole="seance" ToRole="associate" />
+          <NavigationProperty Name="film" Relationship="Self.seance_id_film_fkey" FromRole="seance" ToRole="film" />
+          <NavigationProperty Name="hall" Relationship="Self.seance_id_hall_fkey" FromRole="seance" ToRole="hall" />
+          <NavigationProperty Name="ticket" Relationship="Self.ticket_seance_id_fkey" FromRole="seance" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="ticket_id" />
+          </Key>
+          <Property Name="seance_id" Type="Int32" Nullable="false" />
+          <Property Name="row" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="place" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ticket_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="seance" Relationship="Self.ticket_seance_id_fkey" FromRole="ticket" ToRole="seance" />
+          <NavigationProperty Name="ticket_selling" Relationship="Self.id_ticket" FromRole="ticket" ToRole="ticket_selling" />
+        </EntityType>
+        <EntityType Name="ticket_selling">
+          <Key>
+            <PropertyRef Name="ticket_selling_id" />
+          </Key>
+          <Property Name="id_ticket" Type="Int32" Nullable="false" />
+          <Property Name="date_of_sale" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="associate_id" Type="Int32" Nullable="false" />
+          <Property Name="ticket_selling_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="associate" Relationship="Self.associate_id" FromRole="ticket_selling" ToRole="associate" />
+          <NavigationProperty Name="ticket" Relationship="Self.id_ticket" FromRole="ticket_selling" ToRole="ticket" />
+        </EntityType>
+        <Association Name="associate_id">
+          <End Role="associate" Type="Self.associate" Multiplicity="1" />
+          <End Role="ticket_selling" Type="Self.ticket_selling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="associate">
+              <PropertyRef Name="associate_id" />
+            </Principal>
+            <Dependent Role="ticket_selling">
+              <PropertyRef Name="associate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seance_id_assiciate_fkey">
+          <End Role="associate" Type="Self.associate" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="seance" Type="Self.seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="associate">
+              <PropertyRef Name="associate_id" />
+            </Principal>
+            <Dependent Role="seance">
+              <PropertyRef Name="id_assiciate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seance_id_film_fkey">
+          <End Role="film" Type="Self.film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="seance" Type="Self.seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="film_id" />
+            </Principal>
+            <Dependent Role="seance">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seance_id_hall_fkey">
+          <End Role="hall" Type="Self.hall" Multiplicity="1" />
+          <End Role="seance" Type="Self.seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hall">
+              <PropertyRef Name="holl_id" />
+            </Principal>
+            <Dependent Role="seance">
+              <PropertyRef Name="id_hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ticket_seance_id_fkey">
+          <End Role="seance" Type="Self.seance" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seance">
+              <PropertyRef Name="seance_id" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="seance_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_ticket">
+          <End Role="ticket" Type="Self.ticket" Multiplicity="1" />
+          <End Role="ticket_selling" Type="Self.ticket_selling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ticket">
+              <PropertyRef Name="ticket_id" />
+            </Principal>
+            <Dependent Role="ticket_selling">
+              <PropertyRef Name="id_ticket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cinema_inform_sistemEntities8" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="associate" EntityType="Self.associate" />
+          <EntitySet Name="film" EntityType="Self.film" />
+          <EntitySet Name="hall" EntityType="Self.hall" />
+          <EntitySet Name="seance" EntityType="Self.seance" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" />
+          <EntitySet Name="ticket_selling" EntityType="Self.ticket_selling" />
+          <AssociationSet Name="associate_id" Association="Self.associate_id">
+            <End Role="associate" EntitySet="associate" />
+            <End Role="ticket_selling" EntitySet="ticket_selling" />
+          </AssociationSet>
+          <AssociationSet Name="seance_id_assiciate_fkey" Association="Self.seance_id_assiciate_fkey">
+            <End Role="associate" EntitySet="associate" />
+            <End Role="seance" EntitySet="seance" />
+          </AssociationSet>
+          <AssociationSet Name="seance_id_film_fkey" Association="Self.seance_id_film_fkey">
+            <End Role="film" EntitySet="film" />
+            <End Role="seance" EntitySet="seance" />
+          </AssociationSet>
+          <AssociationSet Name="seance_id_hall_fkey" Association="Self.seance_id_hall_fkey">
+            <End Role="hall" EntitySet="hall" />
+            <End Role="seance" EntitySet="seance" />
+          </AssociationSet>
+          <AssociationSet Name="ticket_seance_id_fkey" Association="Self.ticket_seance_id_fkey">
+            <End Role="seance" EntitySet="seance" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="id_ticket" Association="Self.id_ticket">
+            <End Role="ticket" EntitySet="ticket" />
+            <End Role="ticket_selling" EntitySet="ticket_selling" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище cinema_inform_sistemModelContainer" CdmEntityContainer="cinema_inform_sistemEntities8">
+          <EntitySetMapping Name="associate">
+            <EntityTypeMapping TypeName="cinema_inform_sistemModel.associate">
+              <MappingFragment StoreEntitySet="associate">
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="associate_id" ColumnName="associate_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="film">
+            <EntityTypeMapping TypeName="cinema_inform_sistemModel.film">
+              <MappingFragment StoreEntitySet="film">
+                <ScalarProperty Name="name_film" ColumnName="name_film" />
+                <ScalarProperty Name="producer" ColumnName="producer" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="age_limit" ColumnName="age_limit" />
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hall">
+            <EntityTypeMapping TypeName="cinema_inform_sistemModel.hall">
+              <MappingFragment StoreEntitySet="hall">
+                <ScalarProperty Name="name_hall" ColumnName="name_hall" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="holl_id" ColumnName="holl_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seance">
+            <EntityTypeMapping TypeName="cinema_inform_sistemModel.seance">
+              <MappingFragment StoreEntitySet="seance">
+                <ScalarProperty Name="id_film" ColumnName="id_film" />
+                <ScalarProperty Name="id_assiciate" ColumnName="id_assiciate" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="seance_id" ColumnName="seance_id" />
+                <ScalarProperty Name="id_hall" ColumnName="id_hall" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="movie_format" ColumnName="movie_format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ticket">
+            <EntityTypeMapping TypeName="cinema_inform_sistemModel.ticket">
+              <MappingFragment StoreEntitySet="ticket">
+                <ScalarProperty Name="seance_id" ColumnName="seance_id" />
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="ticket_id" ColumnName="ticket_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ticket_selling">
+            <EntityTypeMapping TypeName="cinema_inform_sistemModel.ticket_selling">
+              <MappingFragment StoreEntitySet="ticket_selling">
+                <ScalarProperty Name="id_ticket" ColumnName="id_ticket" />
+                <ScalarProperty Name="date_of_sale" ColumnName="date_of_sale" />
+                <ScalarProperty Name="associate_id" ColumnName="associate_id" />
+                <ScalarProperty Name="ticket_selling_id" ColumnName="ticket_selling_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

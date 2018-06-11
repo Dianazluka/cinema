@@ -1,0 +1,27 @@
+﻿@model IEnumerable<cinema_i_s.Classes.Query6Data>
+@{
+    ViewBag.Title = "Результаты запроса";
+}
+<h2>@ViewBag.Title</h2>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Дата продажи
+        </th>
+        <th>
+            Сумма билетов
+        </th>
+         </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.date_of_sale
+            </td>
+            <td>
+                @item.sum
+            </td>
+           
+        </tr>
+    }
+</table>

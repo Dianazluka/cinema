@@ -1,0 +1,71 @@
+﻿@model IEnumerable<cinema_i_s.Models.film>
+
+@{
+    ViewBag.Title = "Фильмы";
+}
+@using (Html.BeginForm("Index", "films", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="query">
+                <input type="text" name="search" class="form-control" />
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Найти" class="btn btn-default" />
+        </div>
+    </div>
+}
+<p>
+    @Html.ActionLink("Создать новую запись", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Название фильма
+        </th>
+        <th>
+            Продюсер
+        </th>
+        <th>
+            Жанр
+        </th>
+        <th>
+           Год выпуска
+        </th>
+        <th>
+            Возрастные ограничения
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_film)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.producer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.age_limit)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить запись", "Edit", new { id = item.film_id }) |
+                @Html.ActionLink("Подробно", "Details", new { id = item.film_id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.film_id })
+            </td>
+        </tr>
+    }
+
+</table>

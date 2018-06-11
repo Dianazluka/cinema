@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Запросы";
+}
+@using (Html.BeginForm("Query1", "AllQueries", FormMethod.Post))
+{
+    <h3>Запрос 1</h3>
+    <p>Вывести список фильмов с жанром <input type="text" required name="say" /></p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Выполнить" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br>
+<hr />
+@using (Html.BeginForm("Query2", "AllQueries", FormMethod.Post))
+{
+    <h3>Запрос 2</h3>
+    <p>Не показывать в списоке фильмов этот <input type="text" required name="say" />фильм</p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Выполнить" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br>
+<hr />
+@using (Html.BeginForm("Query3", "AllQueries", FormMethod.Post))
+{
+    <h3>Запрос 3</h3>
+    <p>Вывести сотрудника и фильм начинающийся с буквы <input type="text" required name="letter" />фильм</p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Выполнить" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br>
+<hr />
+@using (Html.BeginForm("Query4", "AllQueries", FormMethod.Post))
+{
+    <h3>Запрос 4</h3>
+    <p>Вывести из списока сеанс дату и время, а из списка залов название зала и цену</p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Выполнить" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br>
+<hr />
+
+@using (Html.BeginForm("Query5", "AllQueries", FormMethod.Post))
+{
+    <h3>Запрос 5</h3>
+    <p>Сколько продано билетов за определенную дату <input type="date" required name="date1" />для каждого сеанса </p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Выполнить" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br>
+<hr />
+@using (Html.BeginForm("Query6", "AllQueries", FormMethod.Post))
+{
+    <h3>Запрос 6</h3>
+    <p>Вывести на экран сумму проданных билетов за период времени с <input type="date" required name="date1" /> по <input type="date" required name="date2" /></p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Выполнить" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br>
+<hr />

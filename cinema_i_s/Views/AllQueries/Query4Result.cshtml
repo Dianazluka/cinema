@@ -1,0 +1,38 @@
+﻿@model IEnumerable<cinema_i_s.Classes.Query4Data>
+@{
+    ViewBag.Title = "Результаты запроса";
+}
+<h2>@ViewBag.Title</h2>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Дата сеанса
+        </th>
+        <th>
+            Время сеанса
+        </th>
+        <th>
+            Название зала
+        </th>
+        <th>
+            цена
+        </th>
+       </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.data
+            </td>
+            <td>
+                @item.time
+            </td>
+            <td>
+                @item.name_hall
+            </td>
+            <td>
+                @item.capacity
+            </td>
+                    </tr>
+    }
+</table>

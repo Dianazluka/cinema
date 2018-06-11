@@ -1,0 +1,32 @@
+﻿@model IEnumerable<cinema_i_s.Classes.Query2Data>
+@{
+    ViewBag.Title = "Результаты запроса";
+}
+<h2>@ViewBag.Title</h2>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Название фильма
+        </th>
+         <th>
+            Год выпуска
+        </th>
+        <th>
+            Возрастные ограничения
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.name_film
+            </td>
+             <td>
+                @item.year
+            </td>
+            <td>
+                @item.age_limit
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<cinema_i_s.Models.ticket_selling>
+
+@{
+    ViewBag.Title = "Продажа билетов";
+}
+
+@using (Html.BeginForm("Index", "ticket_selling", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="query">
+                <input type="text" name="search" class="form-control" />
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Найти" class="btn btn-default" />
+        </div>
+    </div>
+}
+<p>
+    @Html.ActionLink("Создать новую запись", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Дата продажи билета
+        </th>
+        <th>
+            Сотрудник
+        </th>
+        <th>
+            Номер билета
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_of_sale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.associate.age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ticket.row)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить запись", "Edit", new { id = item.ticket_selling_id }) |
+                @Html.ActionLink("Подробно", "Details", new { id = item.ticket_selling_id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ticket_selling_id })
+            </td>
+        </tr>
+    }
+
+</table>

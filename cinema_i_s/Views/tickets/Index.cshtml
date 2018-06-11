@@ -1,0 +1,64 @@
+﻿@model IEnumerable<cinema_i_s.Models.ticket>
+
+@{
+    ViewBag.Title = "Билет";
+}
+
+
+@using (Html.BeginForm("Index", "tickets", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="query">
+                <input type="text" name="search" class="form-control" />
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Найти" class="btn btn-default" />
+        </div>
+    </div>
+}
+<p>
+    @Html.ActionLink("Создать новую запись", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+           Сеанс
+        </th>
+        <th>
+           Ряд
+        </th>
+        <th>
+            Место
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.seance.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.row)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.place)
+        </td>
+
+        <td>
+            @Html.ActionLink("Изменить запись", "Edit", new { id = item.ticket_id }) |
+            @Html.ActionLink("Подробно", "Details", new { id = item.ticket_id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id = item.ticket_id })
+        </td>
+    </tr>
+    }
+
+</table>
