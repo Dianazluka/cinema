@@ -1,0 +1,104 @@
+﻿@model cinema_i_s.Models.seance
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>seance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.movie_format)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.movie_format)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.associate.age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.associate.age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.film.name_film)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film.name_film)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hall.name_hall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hall.name_hall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seance1.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seance1.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seance2.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seance2.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket.row)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket.row)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

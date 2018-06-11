@@ -1,0 +1,98 @@
+﻿@model cinema_i_s.Models.seance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>seance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.movie_format)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.movie_format)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.associate.age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.associate.age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.film.name_film)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film.name_film)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hall.name_hall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hall.name_hall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seance1.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seance1.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seance2.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seance2.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket.row)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket.row)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

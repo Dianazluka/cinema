@@ -1,0 +1,87 @@
+﻿@model IEnumerable<cinema_i_s.Models.seance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.movie_format)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.associate.age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.film.name_film)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hall.name_hall)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seance1.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seance2.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ticket.row)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.movie_format)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.associate.age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.film.name_film)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hall.name_hall)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seance1.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seance2.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ticket.row)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
