@@ -10,6 +10,7 @@ using cinema_i_s.Models;
 
 namespace cinema_i_s.Controllers
 {
+    [Authorize]
     public class filmsController : Controller
     {
         private cinema_inform_sistemEntities11 db = new cinema_inform_sistemEntities11();

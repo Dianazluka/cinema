@@ -12,6 +12,7 @@ namespace cinema_i_s.Controllers
 {
     public class AllQueriesController : Controller
     {
+        [Authorize]
         // GET: AllQueries
         public ActionResult Index()
         {

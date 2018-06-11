@@ -8,6 +8,7 @@ namespace cinema_i_s.Controllers
 {
     public class AllTablesController : Controller
     {
+        [Authorize]
         // GET: AllTables
         public ActionResult Index()
         {
