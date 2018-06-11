@@ -17,7 +17,7 @@ namespace cinema_i_s.Classes
         public int price { get; set; }
         public string movie_format { get; set; }
 
-        public string data { get; set; }
-        public string time { get; set; }
+        public DateTimeOffset data { get; set; }
+        public DateTimeOffset time { get; set; }
     }
 }
